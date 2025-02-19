@@ -46,6 +46,7 @@ public class RockPaperScissors {
         // Pick one item randomly
         //Create an if-statement, compare user and computer - who beats who
         //Test
+        //Test2
 
     }
 }
