@@ -45,6 +45,7 @@ public class RockPaperScissors {
         //Create a String[] of {rock, paper or scissors}
         // Pick one item randomly
         //Create an if-statement, compare user and computer - who beats who
+        //Test
 
     }
 }
