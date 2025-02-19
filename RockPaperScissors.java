@@ -8,6 +8,7 @@ public class RockPaperScissors {
         String[] choices =  {"rock", "paper", "scissors"};
 
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
         boolean isOn = true;
         String shouldContinue = "yes";
 
@@ -17,7 +18,6 @@ public class RockPaperScissors {
                     isOn = false;
             System.out.print("Enter your move (rock, paper, scissors): ");
             String playerChoice = scanner.nextLine().toLowerCase();
-            Random random = new Random();
             String computerChoice =choices[random.nextInt(choices.length)];
             System.out.println("Computer choice: " + computerChoice);
 
