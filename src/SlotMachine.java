@@ -14,7 +14,7 @@ public class SlotMachine {
         boolean isOn = true;
         String input;
 
-        //Welcome text "Welcome to Java Slots
+        //Welcome text "Welcome to Java Slots"
         System.out.println("***************************");
         System.out.println("   Welcome to Java Slots");
 
@@ -35,11 +35,11 @@ public class SlotMachine {
                 System.out.print("Place your bet amount: ");
                 int betAmount = scanner.nextInt();
                 if (betAmount <= balance && betAmount >= 0) {
-                    System.out.println();
-                    System.out.println("Spinning...");
                     // deduct amount from balance
                     balance -= betAmount;
                     // Spin the machine
+                    System.out.println();
+                    System.out.println("Spinning...");
                     for (int i = 0; i < result.length; i++) {
                         result[i] = slots[random.nextInt(slots.length)];
                     }
@@ -54,7 +54,7 @@ public class SlotMachine {
                     System.out.println("****************");
                     System.out.println();
                     //Check if player win or lose
-                    //kontrollera om en symbol förekommer 2 eller 3 gånger i resultatet
+                    //Check if a symbol occurs 2 or 3 times in result
                     String currentSymbol = "p";
 
                     for (String symbol : result) {
@@ -63,6 +63,7 @@ public class SlotMachine {
 
                         currentSymbol = symbol;
                     }
+                    // Check how much player wins, if two in a row, 5 x input amount, if three in a row 10 x input amount
                     if (score > 1) {
                         balance += betAmount * 10;
                         System.out.println("You won $" + (betAmount * 10));
@@ -72,12 +73,12 @@ public class SlotMachine {
                     } else {
                         System.out.println("Sorry you lost this round");
                     }
-                    // Check how much player wins, if two in a row, 5 x input amount, if three in a row 10 x input amount
                     score = 0;
                 } else {
                     System.out.println();
                     System.out.println("Bet is not covered!");
                 }
+                //Ask if player wants to contiue "Do you want to continue (yes/no): "
                 if (balance > 0){
                     System.out.print("Do you want to continue (yes/no): ");
                     input = scanner.next().toLowerCase();
@@ -91,12 +92,9 @@ public class SlotMachine {
             else {
                 isOn = false;
             }
-                //Ask if player wants to contiue "Do you want to continue (yes/no): "
-                // When player wants to quit, display the balance "GAME OVER! Your final balance is $xx"
-
-
         }
         while (isOn);
+        // When player wants to quit, display the balance "GAME OVER! Your final balance is $xx"
         System.out.println();
         System.out.printf("GAME OVER! Your final balance is $%d", balance);
 
