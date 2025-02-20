@@ -14,19 +14,7 @@ public class SlotMachine {
         String input = "yes";
 
         //Welcome text "Welcome to Java Slots"
-        System.out.println("***************************");
-        System.out.println("   Welcome to Java Slots");
-
-        System.out.print("Symbols: ");
-        for (String slot : slots) {
-            System.out.print(slot);
-        }
-        System.out.println();
-        System.out.println("***************************");
-        //Initialize current balance check
-        System.out.printf("Current Balance: $%d", balance);
-        System.out.println();
-
+        welcomeMessage(slots, balance);
 
         do {
             if (balance > 0 && !input.equals("no")) {
@@ -108,6 +96,20 @@ public class SlotMachine {
         }
         score = 0;
         return balance;
+    }
+    static void welcomeMessage(String[] slots, int balance){
+        System.out.println("***************************");
+        System.out.println("   Welcome to Java Slots");
+
+        System.out.print("Symbols: ");
+        for (String slot : slots) {
+            System.out.print(slot);
+        }
+        System.out.println();
+        System.out.println("***************************");
+        //Initialize current balance check
+        System.out.printf("Current Balance: $%d", balance);
+        System.out.println();
     }
 }
 
