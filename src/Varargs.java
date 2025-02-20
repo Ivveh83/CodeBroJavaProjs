@@ -1,13 +1,13 @@
 public class Varargs {
     public static void main(String[] args) {
-        double[] numbers = {1, 2, 3, 4, 5, 6};
+        double[] numbers = {1, 2, 3};
         System.out.println(add(numbers));
         System.out.println(average(numbers));
     }
-    static int add(double... numbers){
-        int sum = 0;
+    static double add(double... numbers){
+        double sum = 0;
         for (int i = 0;i<numbers.length; i++)
-            sum += i;
+            sum += numbers[i];
         return sum;
     }
 
