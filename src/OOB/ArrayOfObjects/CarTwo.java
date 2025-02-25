@@ -1,4 +1,4 @@
-package OOB;
+package OOB.ArrayOfObjects;
 
 // ARRAY OF OBJECTS
 

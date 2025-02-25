@@ -1,4 +1,4 @@
-package OOB;
+package OOB.Class;
 
 public class Student {
     String name;
