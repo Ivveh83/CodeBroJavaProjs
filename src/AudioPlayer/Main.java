@@ -22,11 +22,11 @@ public class Main {
 
         File tracksFolder = new File("src\\AudioPlayer\\Tracks");
         File[] filePaths = tracksFolder.listFiles();
-        int presentSong = 0;
+        final int[] presentSong = {0};
 
         try(Scanner scanner = new Scanner(System.in)) {
             assert filePaths != null;
-            try(AudioInputStream stream = AudioSystem.getAudioInputStream(filePaths[presentSong])){
+            try(AudioInputStream stream = AudioSystem.getAudioInputStream(filePaths[presentSong[0]])){
     //            System.out.println(stream2);
                 Clip clip = AudioSystem.getClip();
                 clip.open(stream);
@@ -52,17 +52,38 @@ public class Main {
                             S = Stop
                             R = Reset
                             Q = Quit
-                            F = Forward
-                            B = Backward
-                            L = List of Songs
-                            C = Choose song
+                            F = Track Forward
+                            B = Track Backward
+                            L = List of Tracks
+                            C = Choose Track from Playlist
                             """);
 
-                    System.out.print("Type in your choice: ");
+                    System.out.print("Make your choice: ");
                     choice = scanner.next().toUpperCase().charAt(0);
 
                     switch (choice){
-                        case 'P' -> clip.start();
+                        case 'P' -> {
+                            clip.start();
+                            clip.addLineListener(event -> {
+                                if (event.getType() == LineEvent.Type.STOP) {
+                                    clip.close();
+                                    if (presentSong[0] < filePaths.length - 1) {
+                                        ++presentSong[0];
+                                        try {
+                                            AudioInputStream nextStream = AudioSystem.getAudioInputStream(filePaths[presentSong[0]]);
+                                            clip.open(nextStream);
+                                            clip.start();
+                                            System.out.println();
+                                            System.out.println("Now playing: " + filePaths[presentSong[0]].getName());
+                                        } catch (Exception e) {
+                                            System.out.println("Error by switching track: " + e.getMessage());
+                                        }
+                                    } else {
+                                        System.out.println("End of Playlist!");
+                                    }
+                                }
+                            });
+                        }
                         case 'S' -> clip.stop();
                         case 'R' -> clip.setMicrosecondPosition(0);
                         case 'Q' -> {
@@ -71,20 +92,20 @@ public class Main {
                         }
                         case 'F' -> {
                             clip.close();
-                            if (presentSong < filePaths.length - 1){
-                                ++presentSong;
+                            if (presentSong[0] < filePaths.length - 1){
+                                ++presentSong[0];
                             }
 
-                            AudioInputStream nextStream = AudioSystem.getAudioInputStream(filePaths[presentSong]);
+                            AudioInputStream nextStream = AudioSystem.getAudioInputStream(filePaths[presentSong[0]]);
                             clip.open(nextStream);
                             clip.start();
                         }
                         case 'B' -> {
                             clip.close();
-                            if (presentSong > 0){
-                                --presentSong;
+                            if (presentSong[0] > 0){
+                                --presentSong[0];
                             }
-                            AudioInputStream nextStream = AudioSystem.getAudioInputStream(filePaths[presentSong]);
+                            AudioInputStream nextStream = AudioSystem.getAudioInputStream(filePaths[presentSong[0]]);
                             clip.open(nextStream);
                             clip.start();
                         }
@@ -94,6 +115,7 @@ public class Main {
                             for (File file : filePaths){
                                 String string = file.toString();
                                 System.out.println(n++ + ". " + string.substring(string.lastIndexOf('\\') + 1, string.lastIndexOf('.')));
+                                System.out.println();
                             }
                         }
                         case 'C' -> {
@@ -110,13 +132,14 @@ public class Main {
                                 System.out.println("You must write a number");
                             }
 
-                        }
+                        }default -> System.out.println("Make a choice from the list");
                     }
                 }
             }
         }
         catch (UnsupportedAudioFileException e){
             System.out.println("File is not supported");
+
         }
         catch (FileNotFoundException e){
             System.out.println("Could not find file");
