@@ -87,15 +87,14 @@ public class Main {
         };
 
         String HANGMANPRESENTATION = """
-                 _                                            \s
-                | |                                           \s
-                | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __ \s
-                | '_ \\ / _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\\s
-                | | | | (_| | | | | (_| | | | | | | (_| | | | |
-                |_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
-                                    __/ |                     \s
-                                   |___/
-                """;
+       _                    _    _
+      | |                  | |  | |
+      | | __ ___   ____ _  | |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __
+  _   | |/ _` \\ \\ / / _` | |  __  |/ _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\ 
+ | |__| | (_| |\\ V / (_| | | |  | | (_| | | | | (_| | | | | | | (_| | | | |
+  \\____/ \\__,_| \\_/ \\__,_| |_|  |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|
+                                                __/ |                      
+                                               |___/                       """;
 
 
         Scanner scanner = new Scanner(System.in);
@@ -114,11 +113,11 @@ public class Main {
 //        System.out.println(wordToGuess);
 
 
-        System.out.println("*************************************************");
-        System.out.println("*************************************************");
+        System.out.println("***************************************************************************");
+        System.out.println("***************************************************************************");
         System.out.println(HANGMANPRESENTATION);
-        System.out.println("*************************************************");
-        System.out.println("*************************************************");
+        System.out.println("***************************************************************************");
+        System.out.println("***************************************************************************");
         System.out.println();
 
 
@@ -181,7 +180,7 @@ public class Main {
             System.out.printf("""
                     *************************************************
                                     CONGRATULATIONS
-                      You have found the correct word which was : %s
+                      You have found the correct word which was: %s
                            You have guessed false %d/%d times.
                                        GAME OVER
                     *************************************************
@@ -197,6 +196,7 @@ public class Main {
                     *************************************************
                     """, numberOfFalseGuesses, TOTALPICS, randomWordString);
         }
+        scanner.close();
     }
 
     private static String pickRandomWord() {
