@@ -208,7 +208,7 @@ public class Main {
             int currentLine = 1;
             while ((line = reader.readLine()) != null) {
                 if (currentLine == targetLine) {
-                    return line.toLowerCase();
+                    return line.toLowerCase().trim();
                 }
                 currentLine++;
             }
