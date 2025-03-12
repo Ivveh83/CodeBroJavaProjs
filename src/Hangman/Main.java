@@ -134,7 +134,7 @@ public class Main {
 
             userGuess = scanner.next().toLowerCase().charAt(0);
 
-            if (guessContainsChar(userGuess, alreadyGuessedLetters)) {
+            if (alreadyGuessedChar(userGuess, alreadyGuessedLetters)) {
                 System.out.printf("""
                         *************************************************
                                You have already guessed this letter!
@@ -219,7 +219,7 @@ public class Main {
         return "pony";
     }
 
-    private static boolean guessContainsChar(char guessedChar, ArrayList<Character> guessedChars) {
+    private static boolean alreadyGuessedChar(char guessedChar, ArrayList<Character> guessedChars) {
         for (char c : guessedChars) {
             if (guessedChar == c) {
                 return true;
